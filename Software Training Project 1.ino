@@ -4,7 +4,7 @@ byte Input_Pins_Ones[] = {9, 8, 7, 6}; // Creates Binary input array to be used 
   
 // Array of possible outputs listed in their binary format.
   
-byte Binary_Output[10][4] = {
+byte Binary_Input[10][4] = {
   
   // List of the Binary digits of 1-9 in acending order.
   
@@ -30,10 +30,11 @@ void setDefaultOutput(byte value){
 }
 
 // sets pins' output mode
-void setPinOutputModes(){
+void setPinOutputModes(byte tens[4], byte ones[4]){
   
-  for (byte i=2; i<=9; i++){
-   pinMode(i, HIGH); 
+  for (byte i=0; i<4; i++){
+   pinMode(tens[i], HIGH); 
+   pinMode(ones[i], HIGH); 
   }
   
 }
@@ -67,9 +68,9 @@ void generate7segOutput(byte value[2]){
   
   for( byte i = 0; i < 4; i++){
     
-	digitalWrite(Input_Pins_Tens[i], Binary_Output[value[1]][i]);
+	digitalWrite(Input_Pins_Tens[i], Binary_Input[value[1]][i]);
     
-    digitalWrite(Input_Pins_Ones[i], Binary_Output[value[0]][i]);
+    digitalWrite(Input_Pins_Ones[i], Binary_Input[value[0]][i]);
   }
 }
 
@@ -81,7 +82,7 @@ void setup()
   
   
   //set pins to output mode
-  setPinOutputModes();
+  setPinOutputModes(Input_Pins_Tens, Input_Pins_Ones);
   
 
 }
